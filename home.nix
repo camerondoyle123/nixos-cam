@@ -1,0 +1,1 @@
+/home/cameron/.config/home-manager/home.nix
