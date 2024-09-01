@@ -7,8 +7,9 @@
 {
   imports =
     [ # Include the results of the hardware scan.
-      ./hardware-configuration.nix
-
+      # these can collide if you use symlinks!
+      # I've provided the absolute path so I don't get confused again.
+      /etc/nixos/hardware-configuration.nix
     ];
 
   # Bootloader.
