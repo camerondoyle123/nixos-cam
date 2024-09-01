@@ -120,9 +120,18 @@
   programs.firefox.enable = true;
   programs.zsh.enable = true;
 
+  # Help with non-Nix binaries for Neovim.
+  programs.nix-ld.enable = true;
+  programs.nix-ld.libraries = with pkgs; [
+    lua-language-server
+    ruff
+  ];
+
+
   # List packages installed in system profile. To search, run:
   # $ nix search wget
   environment.systemPackages = with pkgs; [
+    arc-theme
     clojure
     firefox
     git
@@ -136,8 +145,9 @@
     unzip
     clang
     ripgrep
-    vim # Do not forget to add an editor to edit configuration.nix! The Nano editor is also installed by default.
-  #  wget
+    nixd
+    vim 
+    gtk3
   ];
 
   # Some programs need SUID wrappers, can be configured further or are

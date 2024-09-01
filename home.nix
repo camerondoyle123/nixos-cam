@@ -5,7 +5,7 @@
   # paths it should manage.
   home.username = "cameron";
   home.homeDirectory = "/home/cameron";
-
+  
   # Packages that should be installed to the user profile.
   home.packages = [
     pkgs.htop
@@ -21,6 +21,11 @@
   # the Home Manager release notes for a list of state version
   # changes in each release.
   home.stateVersion = "24.05";
+  
+  # themes
+  gtk.enable = true;
+  gtk.theme.package = pkgs.arc-theme;
+  gtk.theme.name = "Arc-Dark";
 
   # Set nicer cursors.
   home.pointerCursor = {
@@ -29,7 +34,8 @@
     size = 32;
     gtk.enable = true;
   };
-
+ 
+  
 
   # Let Home Manager install and manage itself.
   programs.home-manager.enable = true;
