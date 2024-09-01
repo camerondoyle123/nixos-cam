@@ -31,6 +31,12 @@
     "8.8.8.8"
   ];
   networking.firewall.allowedTCPPorts = [ 80 443 ];
+  
+  # use unfree software for stuff like packer
+  nixpkgs.config.allowUnfree = true;
+
+  # reattempt dns stuff
+  services.resolved.enable = true;
 
   # Set your time zone.
   time.timeZone = "Australia/Melbourne";
@@ -56,6 +62,18 @@
   # Enable the GNOME Desktop Environment.
   services.xserver.displayManager.gdm.enable = true;
   services.xserver.desktopManager.gnome.enable = true;
+
+  # trying out cinnamon
+#  services.xserver = {  
+#    enable = true;  
+#    libinput.enable = true;  
+#    displayManager.lightdm.enable = true;  
+#    desktopManager = {  
+#      cinnamon.enable = true;  
+#      };  
+#    displayManager.defaultSession = "cinnamon";  
+#  };
+
 
   # Configure keymap in X11
   services.xserver.xkb = {
@@ -105,13 +123,20 @@
   # List packages installed in system profile. To search, run:
   # $ nix search wget
   environment.systemPackages = with pkgs; [
-    vim # Do not forget to add an editor to edit configuration.nix! The Nano editor is also installed by default.
-    lf
-    pstree
-    home-manager
-    git
-    jump
+    clojure
     firefox
+    git
+    home-manager
+    jump
+    lf
+    lua
+    neovim
+    nodejs_22
+    pstree
+    unzip
+    clang
+    ripgrep
+    vim # Do not forget to add an editor to edit configuration.nix! The Nano editor is also installed by default.
   #  wget
   ];
 

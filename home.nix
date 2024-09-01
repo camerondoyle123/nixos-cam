@@ -22,6 +22,15 @@
   # changes in each release.
   home.stateVersion = "24.05";
 
+  # Set nicer cursors.
+  home.pointerCursor = {
+    name = "phinger-cursors-dark";
+    package = pkgs.phinger-cursors;
+    size = 32;
+    gtk.enable = true;
+  };
+
+
   # Let Home Manager install and manage itself.
   programs.home-manager.enable = true;
 
@@ -49,4 +58,6 @@
     };
 
     };
+
+
 }
