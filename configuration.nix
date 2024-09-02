@@ -10,7 +10,12 @@
       # these can collide if you use symlinks!
       # I've provided the absolute path so I don't get confused again.
       /etc/nixos/hardware-configuration.nix
+      ./pkgs
     ];
+
+
+  services.displayManager.sddm.enable = true;
+  services.displayManager.sddm.theme = "${import ./pkgs/sddm-theme.nix { inherit pkgs; }}";
 
   # Bootloader.
   boot.loader.grub.enable = true;
@@ -54,7 +59,7 @@
   services.xserver.enable = true;
 
   # Enable the GNOME Desktop Environment.
-  services.xserver.displayManager.gdm.enable = true;
+  #services.xserver.displayManager.gdm.enable = true;
   services.xserver.desktopManager.gnome.enable = true;
 
   # Configure keymap in X11
@@ -114,6 +119,7 @@
   # $ nix search wget
   environment.systemPackages = with pkgs; [
     arc-theme
+    mypackages.sddm-theme
     clojure
     firefox
     git
@@ -130,6 +136,13 @@
     nixd
     vim 
     gtk3
+    libsForQt5.qt5.qtgraphicaleffects
+    libsForQt5.qt5.qtquickcontrols2
+    libsForQt5.qt5.qtsvg
+    libsForQt5.qt5.wrapQtAppsHook
+    libsForQt5.breeze-icons
+    libsForQt5.konsole
+    nix-prefetch-git
   ];
 
   # Some programs need SUID wrappers, can be configured further or are
