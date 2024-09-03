@@ -13,7 +13,7 @@
       ./pkgs
     ];
 
-
+  # for managing the login screen
   services.displayManager.sddm.enable = true;
   services.displayManager.sddm.theme = "${import ./pkgs/sddm-theme.nix { inherit pkgs; }}";
 
@@ -36,6 +36,8 @@
     "8.8.8.8"
   ];
   networking.firewall.allowedTCPPorts = [ 80 443 ];
+  # auto-resolve DNS so you can actually use the god damn internet 
+  services.resolved.enable = true;
 
   # Set your time zone.
   time.timeZone = "Australia/Melbourne";
@@ -59,7 +61,7 @@
   services.xserver.enable = true;
 
   # Enable the GNOME Desktop Environment.
-  #services.xserver.displayManager.gdm.enable = true;
+  #services.xserver.displayManager.gdm.enable = true; # remember, you set one way above with sddm!
   services.xserver.desktopManager.gnome.enable = true;
 
   # Configure keymap in X11
@@ -119,31 +121,37 @@
   # $ nix search wget
   environment.systemPackages = with pkgs; [
     arc-theme
-    mypackages.sddm-theme
+    clang
     clojure
     firefox
     git
+    gtk3
     home-manager
     jump
     lf
-    lua
-    neovim
-    nodejs_22
-    pstree
-    unzip
-    clang
-    ripgrep
-    nixd
-    vim 
-    gtk3
+    libsForQt5.breeze-icons
+    libsForQt5.konsole
     libsForQt5.qt5.qtgraphicaleffects
     libsForQt5.qt5.qtquickcontrols2
     libsForQt5.qt5.qtsvg
     libsForQt5.qt5.wrapQtAppsHook
-    libsForQt5.breeze-icons
-    libsForQt5.konsole
+    lua
+    mypackages.sddm-theme
+    neovim
     nix-prefetch-git
+    nixd
+    nodejs_22
+    pstree
+    ripgrep
+    unzip
+    themechanger
+    vim 
   ];
+
+  # for the fonts
+  fonts.packages = with pkgs; [ jetbrains-mono ];
+
+
 
   # Some programs need SUID wrappers, can be configured further or are
   # started in user sessions.
