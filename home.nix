@@ -1,10 +1,13 @@
-{ config, pkgs, ... }:
+{ config, pkgs, inputs, ... }:
 
 {
+
   # Home Manager needs a bit of information about you and the
   # paths it should manage.
   home.username = "cameron";
   home.homeDirectory = "/home/cameron";
+
+  imports = [ ./home-manager/alacritty.nix ];
   
   # Packages that should be installed to the user profile.
   home.packages = [
@@ -27,10 +30,16 @@
   gtk.theme.package = pkgs.arc-theme;
   gtk.theme.name = "Arc-Dark";
 
+  gtk.cursorTheme = {
+    name = "WhiteSur-cursors";
+    package = pkgs.whitesur-cursors;
+    };
+
+
   # Set nicer cursors.
   home.pointerCursor = {
-    name = "phinger-cursors-dark";
-    package = pkgs.phinger-cursors;
+    name = "WhiteSur-cursors";
+    package = pkgs.whitesur-cursors;
     size = 32;
     gtk.enable = true;
   };
@@ -38,7 +47,6 @@
 
   # Let Home Manager install and manage itself.
   programs.home-manager.enable = true;
-
 
   programs.zsh = { 
     enable = true;

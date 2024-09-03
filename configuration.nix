@@ -2,7 +2,7 @@
 # your system.  Help is available in the configuration.nix(5) man page
 # and in the NixOS manual (accessible by running ‘nixos-help’).
 
-{ config, pkgs, ... }:
+{ config, pkgs, inputs, ... }:
 
 {
   imports =
@@ -53,18 +53,37 @@
     LC_TIME = "en_AU.UTF-8";
   };
 
-  # Enable the X11 windowing system.
-  services.xserver.enable = true;
+  # configure X11
+  services.xserver = {
+    enable = true;
+    
+    desktopManager = {
+      gnome.enable = true;
+      xterm.enable = false;
+      #cinnamon.enable = true;
+    };
+
+    xkb = {
+      layout = "au";
+      variant = "";
+    };
+
+    windowManager.i3 = {
+      enable = true;
+      extraPackages = with pkgs; [
+        dmenu
+        i3status
+        i3lock
+        i3blocks
+      ];
+    };
+
+  };
+
+
 
   # Enable the GNOME Desktop Environment.
   #services.xserver.displayManager.gdm.enable = true; # remember, you set one way above with sddm!
-  services.xserver.desktopManager.gnome.enable = true;
-
-  # Configure keymap in X11
-  services.xserver.xkb = {
-    layout = "au";
-    variant = "";
-  };
 
   # Enable CUPS to print documents.
   services.printing.enable = true;
@@ -126,6 +145,7 @@
     libsForQt5.qt5.qtsvg
     libsForQt5.qt5.wrapQtAppsHook
     lua
+    i3
     mypackages.sddm-theme
     neovim
     nix-prefetch-git
@@ -139,7 +159,11 @@
   ];
 
   # for the fonts
-  fonts.packages = with pkgs; [ jetbrains-mono ];
+  fonts.packages = with pkgs; [ 
+    jetbrains-mono 
+    terminus-nerdfont 
+    font-awesome 
+    ];
 
   # changing the system editor
     programs.neovim = {
