@@ -13,18 +13,18 @@
       scrolling.history = 1000;
       font = {
         normal = {
-          family = "Terminess Nerd Font Mono";
+          family = "Jetbrains Mono";
           style = "Regular";
         };
         bold = {
-          family = "Terminess Nerd Font Mono";
+          family = "Jetbrains Mono";
           style = "Bold";
         };
         italic = {
-          family = "Terminess Nerd Font Mono";
+          family = "Jetbrains Mono";
           style = "Italic";
         };
-        size = 14;
+        size = 12;
       };
       shell.program = "zsh";
     };

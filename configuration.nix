@@ -12,7 +12,7 @@
       /etc/nixos/hardware-configuration.nix
       ./pkgs
     ];
-
+  
   # for managing the login screen
   services.displayManager.sddm.enable = true;
   services.displayManager.sddm.theme = "${import ./pkgs/sddm-theme.nix { inherit pkgs; }}";
@@ -66,16 +66,6 @@
     xkb = {
       layout = "au";
       variant = "";
-    };
-
-    windowManager.i3 = {
-      enable = true;
-      extraPackages = with pkgs; [
-        dmenu
-        i3status
-        i3lock
-        i3blocks
-      ];
     };
 
   };
@@ -145,7 +135,6 @@
     libsForQt5.qt5.qtsvg
     libsForQt5.qt5.wrapQtAppsHook
     lua
-    i3
     mypackages.sddm-theme
     neovim
     nix-prefetch-git
@@ -163,6 +152,7 @@
     jetbrains-mono 
     terminus-nerdfont 
     font-awesome 
+    inconsolata-nerdfont
     ];
 
   # changing the system editor

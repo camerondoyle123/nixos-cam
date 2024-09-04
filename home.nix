@@ -8,7 +8,7 @@
   home.homeDirectory = "/home/cameron";
 
   imports = [ ./home-manager/alacritty.nix ];
-  
+
   # Packages that should be installed to the user profile.
   home.packages = [
     pkgs.htop
@@ -45,6 +45,7 @@
   };
  
 
+
   # Let Home Manager install and manage itself.
   programs.home-manager.enable = true;
 
@@ -67,7 +68,7 @@
     oh-my-zsh = {
       enable = true;
       plugins = [ "git" "jump" ];
-      theme = "robbyrussell";
+      theme = "af-magic";
     };
 
     };
