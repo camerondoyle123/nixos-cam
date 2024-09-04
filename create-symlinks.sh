@@ -16,6 +16,9 @@ fi
 
 
 # create the home-manager directory if it doesn't exist already
-mkdir -p /home/cameron/.config/home-manager
+mkdir -p /home/cameron/.config/home-manager;
 ln -sf /home/cameron/GitHub/nixos-cam/home.nix /home/cameron/.config/home-manager/home.nix;
 
+# need this for neovim to work with packer
+git clone --depth 1 https://github.com/wbthomason/packer.nvim\
+ ~/.local/share/nvim/site/pack/packer/start/packer.nvim;
