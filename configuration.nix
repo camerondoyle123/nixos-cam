@@ -18,9 +18,11 @@
   services.displayManager.sddm.theme = "${import ./pkgs/sddm-theme.nix { inherit pkgs; }}";
 
   # Bootloader.
-  boot.loader.grub.enable = true;
-  boot.loader.grub.device = "/dev/sda";
-  boot.loader.grub.useOSProber = true;
+  #boot.loader.grub.enable = true;
+  #boot.loader.grub.device = "/dev/sda";
+  #boot.loader.grub.useOSProber = true;
+  boot.loader.systemd-boot.enable = true;
+  boot.loader.efi.canTouchEfiVariables = true;
 
   networking.hostName = "nixos"; # Define your hostname.
   # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
@@ -31,7 +33,12 @@
     "1.1.1.1"
     "8.8.8.8"
   ];
-  networking.firewall.allowedTCPPorts = [ 80 443 ];
+  networking.firewall.allowedTCPPorts = [ 
+    22
+    80 
+    443 
+    8096 # Jellyfin 
+  ];
   # auto-resolve DNS so you can actually use the god damn internet 
   services.resolved.enable = true;
 
@@ -56,11 +63,12 @@
   # configure X11
   services.xserver = {
     enable = true;
-    
+   	libinput.enable = true;  
+
     desktopManager = {
-      gnome.enable = true;
-      xterm.enable = false;
-      #cinnamon.enable = true;
+      #gnome.enable = true;
+      #xterm.enable = false;
+      cinnamon.enable = true;
     };
 
     xkb = {
@@ -70,7 +78,9 @@
 
   };
 
-
+  # for running discord
+  nixpkgs.config.allowUnfree = true;
+  #allowUnfreePredicate = (_: true);
 
   # Enable the GNOME Desktop Environment.
   #services.xserver.displayManager.gdm.enable = true; # remember, you set one way above with sddm!
@@ -116,6 +126,7 @@
   ];
 
 
+
   # List packages installed in system profile. To search, run:
   # $ nix search wget
   environment.systemPackages = with pkgs; [
@@ -145,6 +156,21 @@
     unzip
     themechanger
     vim 
+    discord
+    signal-desktop
+    gnomeExtensions.arcmenu
+    gnomeExtensions.appindicator
+    gnomeExtensions.task-up
+    gnomeExtensions.bottom-panel
+    photoflare
+    gimp
+    spotify
+    R
+    rstudio
+    rstudioWrapper
+    texlivePackages.latexmk
+    texliveFull
+    ffmpeg-full
   ];
 
   # for the fonts
@@ -164,7 +190,7 @@
   # List services that you want to enable:
 
   # Enable the OpenSSH daemon.
-  # services.openssh.enable = true;
+  services.openssh.enable = true;
 
   # Open ports in the firewall.
   networking.firewall.enable = true;
